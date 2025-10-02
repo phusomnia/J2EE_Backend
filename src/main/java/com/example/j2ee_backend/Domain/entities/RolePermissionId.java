@@ -1,0 +1,42 @@
+package com.example.j2ee_backend.Domain.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
+
+@Getter
+@Setter
+@Embeddable
+public class RolePermissionId implements java.io.Serializable {
+    private static final long serialVersionUID = -2917802236420900121L;
+    @Size(max = 36)
+    @NotNull
+    @Column(name = "roleId", nullable = false, length = 36)
+    private String roleId;
+
+    @Size(max = 36)
+    @NotNull
+    @Column(name = "permissionId", nullable = false, length = 36)
+    private String permissionId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RolePermissionId entity = (RolePermissionId) o;
+        return Objects.equals(this.permissionId, entity.permissionId) &&
+                Objects.equals(this.roleId, entity.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permissionId, roleId);
+    }
+
+}
